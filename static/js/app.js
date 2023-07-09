@@ -1,12 +1,9 @@
 $(document).ready(function () {
-  const MAX_DATA_COUNT = 10;
-  //connect to the socket server.
-  //   var socket = io.connect("http://" + document.domain + ":" + location.port);
-  var socket = io.connect();
+  var socket = io.connect(':8080');
 
   //receive details from server
   socket.on("newBoatLocated", function (msg) {
     // console.log(msg.value);
-    add_boat(msg.value);
+    newData(msg.value);
   });
 });
