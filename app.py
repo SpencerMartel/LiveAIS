@@ -14,19 +14,28 @@ connected_clients = []
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
 
+bounding_boxes = {
+    "Vancouver" : [[49.0065807923, -125.3776406487], [49.8160633836, -122.683243676]],
+    "Los Angeles": [[33.57448, -118.440615], [33.788177, -117.991549]],
+}
+
 async def connect_ais_stream():
     async with websockets.connect("wss://stream.aisstream.io/v0/stream") as websocket:
         subscribe_message = {"APIKey": secrets["ais_key"],
-                            "BoundingBoxes": [[[49.0065807923, -125.3776406487], [49.8160633836, -122.683243676]]],
+                            "BoundingBoxes": [bounding_boxes["Vancouver"]],
                             "FilterMessageTypes": ["PositionReport"]}
 
         subscribe_message_json = json.dumps(subscribe_message)
         await websocket.send(subscribe_message_json)
         async for message_json in websocket:
-            message = json.loads(message_json)
-            print(message)
-            print("\n")
-            socketio.emit("newBoatLocated", {"value": message})
+            if len(connected_clients) != 0:
+                message = json.loads(message_json)
+                print(message)
+                print("\n")
+                send_message(message)
+
+def send_message(message):
+    socketio.emit("newBoatLocated", {"value": message})
 
 def background_thread():
     asyncio.run(connect_ais_stream())
@@ -59,9 +68,7 @@ Decorator for disconnect
 def disconnect():
     print(f"\nClient disconnected: {request.sid}\n")
     connected_clients.remove(request.sid)
-
-    if len(connected_clients) == 0:
-        connect_ais_stream.close()
+    print(len(connected_clients))
 
 if __name__ == '__main__':
     Flask.run(app, debug=True, host='0.0.0.0', port=8080)
