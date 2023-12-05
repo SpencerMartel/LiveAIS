@@ -1,4 +1,9 @@
 #map {
-    height: 500px;
-    width: 700px
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+}
+
+.leaflet-popup-content-wrapper{
+    opacity: 0.8;
 }

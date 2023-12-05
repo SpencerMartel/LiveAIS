@@ -15,25 +15,38 @@
 
   <!-- Leaflet imports -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-  integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-  integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet-ant-path@1.3.0/dist/leaflet-ant-path.js"></script>
+  <!-- Leaflet plugin for marker clustering -->
+  <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
 
   <!-- Personal Imports -->
-  <link href="../static/css/map.css" rel="stylesheet">
+  <link href="../../static/css/map.css" rel="stylesheet">
+  <link href="../../static/css/main.css" rel="stylesheet">
+  <link href="../../static/css/app.css" rel="stylesheet">
+  <link href="../../static/css/sidebar.css" rel="stylesheet">
+
+  <script src="https://kit.fontawesome.com/6680fa8d52.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-  <script type="text/javascript" src="{{ url_for('static', filename = 'js/app.js') }}"></script>
-  <div class="container">
-    <div class="hero">
-      <h1>Real Time AIS Display</h1>
-      <div id="map"></div>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='js/app.js')}}"></script>
 
-    </div>
+  <div id="mySidebar" class="sidebar">
+    <center><h1 style="white-space: nowrap;">Live Stats</h1>
+    <div id="chart-1"></div></center>
   </div>
-  <script src="../static/js/map.js"></script>
+  <button id="sidebarButton" onclick="openNav()">&#9776;</button>
+
+  <div id="map"></div>
+
+  <script src="../../static/js/MovingMarker.js"></script>
+  <script src="../../static/js/map.js"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='js/d3.js')}}"></script>
 </body>
 
 </html>
