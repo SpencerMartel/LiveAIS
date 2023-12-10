@@ -1,12 +1,22 @@
+/* Sidebar container */
+#sidebar-container {
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+    width: 0;
+    height: 100vh;
+    transition: 0.5s;
+    position: fixed;
+    z-index: 10;
+    overflow: hidden;
+}
+
+
 /* The sidebar menu */
 .sidebar {
-    height: 100%;
-    width: 0;
+    padding: 10px;
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: transparent;
-    transition: 0.5s;
 }
 
 /* The sidebar links */
@@ -39,6 +49,7 @@
     z-index: 2;
     transition: all .5s;
     margin: 10px;
+    transition: 0.5s;
 }
 
 #sidebarButton:hover {

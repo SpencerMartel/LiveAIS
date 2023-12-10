@@ -71,7 +71,6 @@ function percantageOfBoatTypes() {
     var percentDocked = (docked / total) * 100
     var percentMoving = (moving / total) * 100
     // Call render function on piechart
-    console.log(percentDocked, percentMoving)
     renderPieChart([percentDocked, percentMoving])
 }
 

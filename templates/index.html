@@ -36,11 +36,15 @@
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script type="text/javascript" src="{{url_for('static', filename='js/app.js')}}"></script>
 
-  <div id="mySidebar" class="sidebar">
-    <center><h1 style="white-space: nowrap;">Live Stats</h1>
-    <div id="chart-1"></div></center>
+  <div id="sidebar-container">
+    <div id="mySidebar" class="sidebar">
+      <center>
+        <h1 style="white-space: nowrap;">Live Stats</h1>
+        <div id="chart-1"></div>
+      </center>
+    </div>
   </div>
-  <button id="sidebarButton" onclick="openNav()">&#9776;</button>
+  <button id="sidebarButton" onclick="openNav()" class=""></button>
 
   <div id="map"></div>
 

@@ -16,6 +16,7 @@ body {
     flex-direction: column;
     display: flex;
     flex-direction: row;
+    background-attachment: fixed;
 }
 
 main::-webkit-scrollbar {
