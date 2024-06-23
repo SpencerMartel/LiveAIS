@@ -11,6 +11,10 @@ var svg = d3
     .attr("width", width)
     .attr("height", height)
 
+// Create circles (data)
+svg.append("circle").attr("cx", 100).attr("cy", 130).attr("r", 6).style("fill", "red").on('mouseover',function(d){ console.log(d);});
+svg.append("circle").attr("cx", 100).attr("cy", 160).attr("r", 6).style("fill", "blue").on('mouseover',function(d){ console.log(d);});
+
 function responsivefy(svg) {
     // get container + svg aspect ratio
     var container = d3.select(svg.node().parentNode),
@@ -37,23 +41,22 @@ function responsivefy(svg) {
         svg.attr("height", Math.round(targetWidth / aspect));
     }
 }
-svg.append("circle").attr("cx", 100).attr("cy", 130).attr("r", 6).style("fill", "red")
-svg.append("circle").attr("cx", 100).attr("cy", 160).attr("r", 6).style("fill", "blue")
-svg.append("text").attr("x", 115).attr("y", 132).text("Docked boats").style("font-size", "15px").attr("alignment-baseline","middle")
-svg.append("text").attr("x", 115).attr("y", 162).text("Moving boats").style("font-size", "15px").attr("alignment-baseline","middle")
+
+// Text in center of pie
+svg.append("text").attr("x", 115).attr("y", 132).text("Docked boats")
+    .style("font-size", "15px")
+    .style("fill", "#FAF9F6")
+    .attr("alignment-baseline","middle")
+svg.append("text").attr("x", 115).attr("y", 162).text("Moving boats")
+    .style("font-size", "15px")
+    .style("fill", "#FAF9F6")
+    .attr("alignment-baseline","middle")
 
 
 var g = svg
     .append('g')
     .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
 
-
-function makeData(size) {
-    var z = d3.range(size).map(function (item) {
-        return Math.random() * 100;
-    });
-    return z;
-}
 
 var min = Math.min(width, height)
 var oRadius = (min / 2) * 0.9
@@ -70,32 +73,12 @@ var pie = d3
 // construct arc generator
 var arc = d3.arc().outerRadius(oRadius).innerRadius(iRadius)
 
-// generate random data
-var data = makeData(2)
-// Define colors here
+// Define colors
 var color = d3.scaleLinear().range(["red", "blue"])
 
-// enter data and draw pie chart
-var path = g
-    .datum(data)
-    .selectAll('path')
-    .data(pie)
-    .enter()
-    .append('path')
-    .attr('class', 'piechart')
-    .attr('fill', function (d, i) {
-        return color(i)
-    })
-    .attr('d', arc)
-    .each(function (d) {
-        this._current = d
-    })
-
-
 function renderPieChart(dataArray) {
-    // generate new random data
-
-
+    // dataArray contains [% of docked boats, % of moving boats] 
+    let newDataArray = dataArray
     // Store the displayed angles in _current.
     // Then, interpolate from _current to the new angles.
     // During the transition, _current is updated in-place by d3.interpolate.

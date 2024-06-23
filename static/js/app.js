@@ -27,3 +27,12 @@ function closeNav() {
   sidebarButton.style.left = "0"
   sidebarButton.onclick = function () { openNav(); };
 }
+
+$('a').on('click', function(e){
+	e.preventDefault();
+  if ( $(this).hasClass('active-menu') ) {
+    $( this ).removeClass( 'active-menu' );
+  } else {
+    $( this ).addClass( 'active-menu' );
+  }
+});
